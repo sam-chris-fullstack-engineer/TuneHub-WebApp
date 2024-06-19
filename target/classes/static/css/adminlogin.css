@@ -1,0 +1,118 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('/images/admin2.jpg') no-repeat center center fixed; /* Added background image */
+    background-size: cover; /* Cover the entire background */
+    color: #fff;
+    overflow-x: hidden;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.7); /* Increased opacity */
+    padding: 0.5em 2em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 1200px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.logo {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.logo:hover {
+    color: #0A0;
+}
+
+#logout {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#logout:hover {
+    color: #61dafb;
+}
+
+.container {
+    text-align: center;
+    margin: 140px auto 20px auto;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.6); /* Adjusted background opacity */
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #fff; /* Ensuring the heading is white for visibility */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    margin: 20px 0;
+}
+
+.action-button {
+    width: 180px;
+    padding: 15px 20px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #000;
+    border: none;
+    background-color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s, font-weight 0.3s, transform 0.3s;
+}
+
+.action-button:hover {
+    font-weight: 700;
+    background-color: #e6e5e5;
+    transform: scale(1.02);
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+        margin-top: 160px;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+}

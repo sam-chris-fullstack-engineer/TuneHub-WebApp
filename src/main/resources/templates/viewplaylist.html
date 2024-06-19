@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists - TuneHub</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/viewplaylist.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" th:href="@{/css/footer.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="top-nav">
+            <a href="index" class="logo">TuneHub</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Playlist Name</th>
+                        <th>Song Name</th>
+                        <th>Play</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="playlist : ${playlists}">
+                        <td th:text="${playlist.name}"></td>
+                        <td>
+                            <table class="nested-table">
+                                <tbody>
+                                    <tr th:each="song : ${playlist.songs}">
+                                        <td th:text="${song.name}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="nested-table">
+                                <tbody>
+                                    <tr th:each="song : ${playlist.songs}">
+                                        <td>
+                                            <audio controls>
+                                                <source th:src="@{${song.link}}" type="audio/mpeg">
+                                            </audio>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:replace="~{footer :: footer}"></div>
+</body>
+</html>

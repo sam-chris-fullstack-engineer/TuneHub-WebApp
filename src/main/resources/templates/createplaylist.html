@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Playlist - TuneHub</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/createplaylist.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" th:href="@{/css/footer.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Popup Box Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #fff;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .popup-content {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .popup-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #000;
+            background-color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, font-weight 0.3s, transform 0.3s;
+        }
+
+        .popup-button:hover {
+            font-weight: 700;
+            background-color: #e6e5e5;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="top-nav">
+            <a href="index" class="logo">TuneHub</a>
+        </nav>
+    </header>
+    <div class="container">
+        <form id="playlistForm" action="addplaylist" method="post" onsubmit="return validateForm()">
+            <label for="playlist-name">Playlist Name:</label>
+            <input type="text" name="name" id="playlist-name" placeholder="Enter the Playlist Name" required>
+            <div id="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Song Name</th>
+                            <th>Artist</th>
+                            <th>Genre</th>
+                            <th>Play</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="song : ${songs}">
+                            <td><input type="checkbox" th:name="songs" th:value="${song.id}"></td>
+                            <td th:text="${song.name}"></td>
+                            <td th:text="${song.artist}"></td>
+                            <td th:text="${song.genre}"></td>
+                            <td>
+                                <audio controls>
+                                    <source th:src="@{${song.link}}" type="audio/mpeg">
+                                </audio>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="add-playlist-button">
+                <input type="submit" value="Add Playlist" id="button">
+            </div>
+        </form>
+    </div>
+
+    <!-- Popup Box -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <p>Please add some songs!</p>
+            <button class="popup-button" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <div th:replace="~{footer :: footer}"></div>
+
+    <script>
+        function validateForm() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            if (checkboxes.length === 0) {
+                showPopup();
+                return false;
+            }
+            return true;
+        }
+
+        function showPopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "block";
+        }
+
+        function closePopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+    </script>
+</body>
+</html>
