@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Customer</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/customerlogin.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" th:href="@{/css/footer.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="top-nav">
+            <a href="index" class="logo">TuneHub</a>
+            <form action="logout">
+                <button type="submit" class="action-button">Logout</button>
+            </form>
+        </nav>
+    </header>
+    <div class="container">
+        <header>
+            <h1>Welcome, User!</h1>
+        </header>
+        <main>
+            <div th:if="${ispremium}" class="premium">
+                <div id="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Song name</th>
+                                <th>Artist</th>
+                                <th>Genre</th>
+                                <th>Play</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="song:${songs}">
+                                <td th:text="${song.name}"></td>
+                                <td th:text="${song.artist}"></td>
+                                <td th:text="${song.genre}"></td>
+                                <td>
+                                    <audio controls>
+                                        <source th:src="@{${song.link}}" type="audio/mpeg">
+                                    </audio>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div th:unless="${ispremium}" class="non-premium">
+                <form action="pay">
+                    <button type="submit" class="action-button">Get Premium</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <div th:replace="~{footer :: footer}"></div>
+</body>
+</html>

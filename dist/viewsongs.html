@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs - TuneHub</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/viewsongs.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" th:href="@{/css/footer.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="top-nav">
+            <a href="index" class="logo">TuneHub</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Song Name</th>
+                        <th>Artist</th>
+                        <th>Genre</th>
+                        <th>Play</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="song : ${songs}">
+                        <td th:text="${song.name}"></td>
+                        <td th:text="${song.artist}"></td>
+                        <td th:text="${song.genre}"></td>
+                        <td>
+                            <audio controls>
+                                <source th:src="${song.link}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:replace="~{footer :: footer}"></div>
+</body>
+</html>
